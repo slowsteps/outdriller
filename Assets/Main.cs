@@ -17,6 +17,7 @@ public class Main : MonoBehaviour {
 	public GUITexture continuebutton;
 	public GameObject fire;
 	public Light drillglow;
+	public GUITexture coin;
 	//game state properties accessible from other scenes
 	static public int days;
 	static public int coins;
@@ -191,6 +192,8 @@ public class Main : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 		Emitter1.particleSystem.Stop();
 		coins++;
+		Object newcoin = Instantiate(coin);
+		print("newcoin " + newcoin);
 		
 		//print ("exit");
 		//other.enabled = false;
