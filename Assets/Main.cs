@@ -118,9 +118,9 @@ public class Main : MonoBehaviour {
 		mainCamera.transform.Translate(delta,0f,0f);
 		mainCamera.transform.LookAt(ship.transform);
 		
-		
+		//normal forward motion when fuel is available
 		if (fuel <= 0 ) {
-			//game over
+			//ran out of fuel, level complete
 			fuelLabel.guiText.material.color = Color.red;
 			Emitter1.particleSystem.Stop();
 			fire.particleSystem.Stop();
@@ -129,6 +129,7 @@ public class Main : MonoBehaviour {
 			fuel = 0;
 			updateUI();
 		}
+		//fuel available, moving forward
 		else {
 			ship.rigidbody.AddForce(6f,0f,0f);  
 			fuel = fuel - fuelconsumption;
@@ -149,11 +150,13 @@ public class Main : MonoBehaviour {
 		if (drillBoostOn & (fuel > 0)) {
 			pushbackforce = -10 + drillpower;
 			fuelconsumption = 5;
+			Emitter1.particleSystem.emissionRate = 300;
 		}
 		//drill off
 		else {
 			pushbackforce = -10 ;
 			fuelconsumption = 1;
+			Emitter1.particleSystem.emissionRate = 5;
 		}
 	
 		
