@@ -18,6 +18,7 @@ public class Main : MonoBehaviour {
 	public GameObject fire;
 	public Light drillglow;
 	public GUITexture coin;
+	public GameObject message;
 	//game state properties accessible from other scenes
 	static public int days;
 	static public int coins;
@@ -27,8 +28,10 @@ public class Main : MonoBehaviour {
 	static public int temperature;
 	static public int overheatingtemperature;
 	static public bool levelcomplete;
+	static public bool countdownready;
 	//
 	private bool drillBoostOn;
+
 	private float drillspeed; //used for visual rotating effect
 	private int fuelconsumption;
 	private bool jumpAllowed;
@@ -40,7 +43,6 @@ public class Main : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 			//TODO constructor runs everytime on openscene
-			print ("starting main");
 			mainCamera.transform.LookAt(ship.transform);
 			startRound();	
 	}
@@ -57,6 +59,7 @@ public class Main : MonoBehaviour {
 			overheatingtemperature = 50;
 			updateUI();
 			gameisalreadyrunning=true;
+			//message.GetComponent<Message>().setMessage("Get out!, start drilling!");
 		}
 		//consecutive plays
 		else {
@@ -75,11 +78,9 @@ public class Main : MonoBehaviour {
 			drillspeed = 20f;
 			fuelconsumption = 1;	
 			fuel = fueltankcapacity;
-		
+			countdownready = false;
+			drillglow.intensity = 0;
 	}
-	
-
-	
 	
 	void updateUI() {
 		fuelLabel.guiText.text = fuel + " fuel";
@@ -88,8 +89,12 @@ public class Main : MonoBehaviour {
 		drillpowerLabel.guiText.text = "drillpower " + drillpower;
 		temperatureLabel.guiText.text = temperature + " Degrees";
 	}
+
 	
 	void Update () {
+		
+		//wait for the countdown to finish
+		if (!countdownready) return;
 		
 		fire.transform.parent = this.transform;
 		
@@ -113,12 +118,12 @@ public class Main : MonoBehaviour {
 		}
 		
 		drillglow.intensity = temperature/overheatingtemperature;
+	
 		
-		//camera scrolls with ship TODO, there must be a better way to do this
-		float delta = ship.transform.position.x - mainCamera.transform.position.x;
-		mainCamera.transform.Translate(delta,0f,0f);
+		mainCamera.transform.position = new Vector3(ship.transform.position.x,0,mainCamera.transform.position.z);
 		mainCamera.transform.LookAt(ship.transform);
 		
+		//LEVEL COMPLETE SECTION
 		//normal forward motion when fuel is available
 		if (fuel <= 0 ) {
 			//ran out of fuel, level complete
@@ -138,6 +143,10 @@ public class Main : MonoBehaviour {
 			
 		}
 		
+		
+		
+		
+		//END LEVELCOMPLETE
 		
 		if (Input.GetKeyDown(KeyCode.RightArrow)) {
 			drillBoostOn = true;
@@ -164,7 +173,16 @@ public class Main : MonoBehaviour {
 		
 	}
 	
+	
+	//TODO should these triggers be in the rubble objects
 	//collisions
+	
+	public void onFinishReached() {
+		message.GetComponent<Message>().setMessage("Level completed!");
+		levelcomplete = true;
+		fuel = 0;
+		
+	}
 	
 	void OnTriggerEnter(Collider other) {
 		if (other.name.Equals("rubble")) {
@@ -188,35 +206,16 @@ public class Main : MonoBehaviour {
 	}
 	
 	
-	
+	//TODO every block rewards a coin
 	void OnTriggerExit(Collider other) {
 		Emitter1.particleSystem.Stop();
-		coins++;
+		
 		Object newcoin = Instantiate(coin);
-		print("newcoin " + newcoin);
 		
-		//print ("exit");
-		//other.enabled = false;
-		
-		updateUI();
 	}
 	
 	
-	//physics collisions, might be useful later
-	void OnCollisionEnter(Collision collision) {
-				
-		//put ship back at the beginning when a danger block is hit
-		if (collision.collider.name == "danger") {
-			days++;
-			startRound();
-		}
-		//a destructable block has been hit, coins rewarded
-		else if (collision.collider.name == "movable") {
-			
-			coins++;
-			updateUI();
-		}
-	}
+	
 	
 
 	

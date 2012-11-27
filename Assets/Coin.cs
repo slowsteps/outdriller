@@ -5,7 +5,8 @@ public class Coin : MonoBehaviour {
 
 	// Use this for initialization
 	
-	public GameObject target;
+	
+	GameObject coinslabel;
 	
 	
 	Hashtable ht = new Hashtable();
@@ -13,18 +14,23 @@ public class Coin : MonoBehaviour {
 	void Awake(){
 		ht.Add("x",0.15);
 		ht.Add("y",0.95);
-		ht.Add("time",1.2);
+		ht.Add("time",1.0);
 		ht.Add("EaseType","easeInOutCubic");
 		ht.Add("oncomplete","OnComplete");
 	}
 
 	void Start(){
+		//get a reference to the object
+		
+	
+		
 		iTween.MoveTo(gameObject,ht);
 	}
 	
 	void OnComplete() {
-		print(target);
-		
+	
+		coinslabel = GameObject.Find("coinslabel");
+		coinslabel.GetComponent<Coinslabel>().SwallowCoin();
 		Destroy(this.gameObject);
 	}
 	

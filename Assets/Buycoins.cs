@@ -1,20 +1,19 @@
 using UnityEngine;
 using System.Collections;
 
-
-
-public class Button : MonoBehaviour {
+public class Buycoins : MonoBehaviour {
 	
-	public string targetscene;
+	
+	public Shopmanager shopmanager;
 	
 	// Use this for initialization
 	void Start () {
-		
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//print ("ticking");
+	
 	}
 	
 	void OnMouseDown() {
@@ -25,8 +24,10 @@ public class Button : MonoBehaviour {
 	
 	void OnMouseUp() {
 		this.transform.localScale = new Vector3(0.0f,0.0f,1f);	
-		Application.LoadLevel(targetscene);
+		Main.coins += 10;
+		shopmanager.updateUI();
 	}
+	
 	
 	
 }

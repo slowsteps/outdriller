@@ -37,6 +37,12 @@ public class Destructable : MonoBehaviour {
 		beingdrilled = false;
 		this.collider.isTrigger = false;
 		this.rigidbody.isKinematic = false;
+		if (!Main.levelcomplete) {
+			float xforce = Random.Range(-100,-10);
+			float spin = Random.Range(-100,100);
+			this.rigidbody.AddForce( new Vector3(xforce,200f,0f));
+			this.rigidbody.AddTorque( new Vector3(0,0,spin)); 
+		}
 	}
 
 
