@@ -30,7 +30,7 @@ public class Destructable : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		beingdrilled = true;
-		print("enter " + this.name);
+		
 	}
 	
 	void OnTriggerExit(Collider other) {

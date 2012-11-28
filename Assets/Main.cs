@@ -29,6 +29,8 @@ public class Main : MonoBehaviour {
 	static public int overheatingtemperature;
 	static public bool levelcomplete;
 	static public bool countdownready;
+	static public float countdowntimestamp;
+	private bool turbostartallowed;
 	//
 	private bool drillBoostOn;
 
@@ -36,6 +38,8 @@ public class Main : MonoBehaviour {
 	private int fuelconsumption;
 	private bool jumpAllowed;
 	private float pushbackforce;
+	private float savedtimestamp;
+	
 	static private bool gameisalreadyrunning;
 	
 	
@@ -79,6 +83,7 @@ public class Main : MonoBehaviour {
 			fuelconsumption = 1;	
 			fuel = fueltankcapacity;
 			countdownready = false;
+			turbostartallowed = true;
 			drillglow.intensity = 0;
 	}
 	
@@ -90,12 +95,20 @@ public class Main : MonoBehaviour {
 		temperatureLabel.guiText.text = temperature + " Degrees";
 	}
 
-	
+	//GAME FRAME LOOP
 	void Update () {
 		
-		//wait for the countdown to finish
+		//wait for the countdown to finish, award one off boost for fast click after countdown
+		//the faster you click, the higher the boost
+		//TODO only works if you click after end of countdown, not before.
 		if (!countdownready) return;
-		
+		else if (Input.anyKeyDown & turbostartallowed) {
+			float turbodelta = Mathf.Abs(countdowntimestamp - Time.time);
+			ship.rigidbody.AddForce(new Vector3(200/turbodelta,0,0));
+			turbostartallowed = false;
+		}
+		//end countdown
+			
 		fire.transform.parent = this.transform;
 		
 		//the drill is running, make red when close to overheating
@@ -192,7 +205,6 @@ public class Main : MonoBehaviour {
 		
 	}
 	
-	
 	//breakable stuff to destroy, slowing the vehicle down
 	void OnTriggerStay(Collider other) {
 		
@@ -209,8 +221,7 @@ public class Main : MonoBehaviour {
 	//TODO every block rewards a coin
 	void OnTriggerExit(Collider other) {
 		Emitter1.particleSystem.Stop();
-		
-		Object newcoin = Instantiate(coin);
+		Instantiate(coin);
 		
 	}
 	
