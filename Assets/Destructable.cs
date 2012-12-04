@@ -16,33 +16,42 @@ public class Destructable : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//todo add sin bounce
+		//Bouncy effect
 		if (beingdrilled & !Main.levelcomplete) {
-			float newy = 0.1f*Mathf.Cos(1f*Time.frameCount);
-			transform.position = new Vector3(oldpos.x,newy,oldpos.z);
+			float deltay = 0.1f*Mathf.Cos(1f*Time.frameCount);
+			transform.position = oldpos + new Vector3(0,deltay,0);
 		}
 	}
 	
 	void OnDestruct() {
-		print ("message received");	
 		beingdrilled = false;
 	}
 
 	void OnTriggerEnter(Collider other) {
-		beingdrilled = true;
-		
+		//print (other.name);
+		if (other.name == "ship") {	
+			beingdrilled = true;
+		}
 	}
 	
 	void OnTriggerExit(Collider other) {
-		beingdrilled = false;
-		this.collider.isTrigger = false;
-		this.rigidbody.isKinematic = false;
-		if (!Main.levelcomplete) {
-			float xforce = Random.Range(-100,-10);
-			float spin = Random.Range(-100,100);
-			this.rigidbody.AddForce( new Vector3(xforce,200f,0f));
-			this.rigidbody.AddTorque( new Vector3(0,0,spin)); 
+		//TODO ADD particle explosion
+		if (other.name == "ship") {
+			Destroy(this.GetComponent<Transform>().gameObject);
 		}
+		
+		/*if (other.name == "ship") {
+			beingdrilled = false;
+			this.collider.isTrigger = false;
+			this.rigidbody.isKinematic = false;
+			if (!Main.levelcomplete) {
+				float xforce = Random.Range(-100,-10);
+				float yforce = Random.Range(300,1000);
+				float spin = Random.Range(-100,100);
+				this.rigidbody.AddForce(new Vector3(xforce,yforce,0));
+				this.rigidbody.AddTorque(new Vector3(0,0,spin)); 
+			}
+		}*/
 	}
 
 

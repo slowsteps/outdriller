@@ -29,7 +29,7 @@ public class Coinslabel : MonoBehaviour {
 	public void SwallowCoin() {
 		//iTween.MoveTo(gameObject,ht);
 		iTween.PunchPosition(gameObject,ht);
-		print ("swallowing coin");	
+		//print ("swallowing coin");	
 		Main.coins++;
 	}
 	

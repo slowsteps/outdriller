@@ -5,8 +5,8 @@ public class Main : MonoBehaviour {
 	
 	//references to scene objects, assigned via Ship's inspector
 	public GameObject ship;
-	public GameObject gMotor1;
-	public GameObject gMotor2;
+	public GameObject vehicle;
+	public GameObject drill;
 	public GameObject Emitter1;
 	public GameObject mainCamera;
 	public GameObject coinsLabel;
@@ -35,10 +35,11 @@ public class Main : MonoBehaviour {
 	private bool drillBoostOn;
 
 	private float drillspeed; //used for visual rotating effect
+	private float forwardspeed;
 	private int fuelconsumption;
 	private bool jumpAllowed;
-	private float pushbackforce;
 	private float savedtimestamp;
+	private Vector3 startposition;
 	
 	static private bool gameisalreadyrunning;
 	
@@ -47,7 +48,7 @@ public class Main : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 			//TODO constructor runs everytime on openscene
-			mainCamera.transform.LookAt(ship.transform);
+			mainCamera.transform.LookAt(transform);
 			startRound();	
 	}
 	
@@ -57,6 +58,8 @@ public class Main : MonoBehaviour {
 		
 		//first play only
 		if (!gameisalreadyrunning) {
+			startposition = ship.transform.position;
+			print ("startpos " + startposition);
 			drillBoostOn = false;
 			drillpower = 4;
 			fueltankcapacity = 800;
@@ -67,9 +70,8 @@ public class Main : MonoBehaviour {
 		}
 		//consecutive plays
 		else {
-			Vector3 startposition = new Vector3(0f,0f,0f);
-			ship.rigidbody.MovePosition(startposition);
-			ship.rigidbody.velocity = startposition;
+			
+			//ship.rigidbody.velocity = Vector3.zero;
 			fuel = fueltankcapacity;
 			days++;
 			updateUI();
@@ -79,7 +81,8 @@ public class Main : MonoBehaviour {
 			Emitter1.particleSystem.Stop();
 			temperature = 0;	
 			levelcomplete = false;
-			drillspeed = 20f;
+			drillspeed = 4f;
+			forwardspeed = 5f;
 			fuelconsumption = 1;	
 			fuel = fueltankcapacity;
 			countdownready = false;
@@ -97,19 +100,24 @@ public class Main : MonoBehaviour {
 
 	//GAME FRAME LOOP
 	void Update () {
+
+		//Wait for countdown to finish
 		
-		//wait for the countdown to finish, award one off boost for fast click after countdown
-		//the faster you click, the higher the boost
-		//TODO only works if you click after end of countdown, not before.
-		if (!countdownready) return;
-		else if (Input.anyKeyDown & turbostartallowed) {
+		//Award timing speed boost
+		if (Input.anyKeyDown & turbostartallowed) {
 			float turbodelta = Mathf.Abs(countdowntimestamp - Time.time);
-			ship.rigidbody.AddForce(new Vector3(200/turbodelta,0,0));
+			if (countdownready & (turbodelta < 1)) {
+				ship.rigidbody.AddForce(new Vector3(200/turbodelta,0,0));
+				//message.GetComponent<Message>().setMessage("Turbo start!");
+			}
 			turbostartallowed = false;
 		}
 		//end countdown
-			
-		fire.transform.parent = this.transform;
+		if (!countdownready) return;	
+		
+		//fire.transform.parent = this.transform;
+		vehicle.transform.position = this.transform.position;
+		
 		
 		//the drill is running, make red when close to overheating
 		if (temperature > overheatingtemperature - 20) {
@@ -121,7 +129,7 @@ public class Main : MonoBehaviour {
 		
 		
 		if (drillBoostOn & (temperature <= overheatingtemperature) & (fuel > 0)) {
-			gMotor1.transform.Rotate(drillspeed,0,0);	
+			drill.transform.Rotate(0,drillspeed,0);	
 			temperature++;
 		}
 		else {
@@ -132,8 +140,8 @@ public class Main : MonoBehaviour {
 		
 		drillglow.intensity = temperature/overheatingtemperature;
 	
-		
-		mainCamera.transform.position = new Vector3(ship.transform.position.x,0,mainCamera.transform.position.z);
+		//camera tracks ship
+		mainCamera.transform.position = new Vector3(ship.transform.position.x,mainCamera.transform.position.y,mainCamera.transform.position.z);
 		mainCamera.transform.LookAt(ship.transform);
 		
 		//LEVEL COMPLETE SECTION
@@ -150,7 +158,8 @@ public class Main : MonoBehaviour {
 		}
 		//fuel available, moving forward
 		else {
-			ship.rigidbody.AddForce(6f,0f,0f);  
+			//TODO should be .left??
+			ship.rigidbody.AddForce(forwardspeed*Vector3.right);
 			fuel = fuel - fuelconsumption;
 			updateUI();
 			
@@ -171,15 +180,13 @@ public class Main : MonoBehaviour {
 	
 		//drill on
 		if (drillBoostOn & (fuel > 0)) {
-			pushbackforce = -10 + drillpower;
 			fuelconsumption = 5;
 			Emitter1.particleSystem.emissionRate = 300;
 		}
 		//drill off
 		else {
-			pushbackforce = -10 ;
 			fuelconsumption = 1;
-			Emitter1.particleSystem.emissionRate = 5;
+			Emitter1.particleSystem.emissionRate = 50;
 		}
 	
 		
@@ -187,39 +194,36 @@ public class Main : MonoBehaviour {
 	}
 	
 	
-	//TODO should these triggers be in the rubble objects
-	//collisions
+	//TODO should these triggers be in the rubble objects?
+
 	
 	public void onFinishReached() {
-		message.GetComponent<Message>().setMessage("Level completed!");
+		//message.GetComponent<Message>().setMessage("Level completed!");
 		levelcomplete = true;
 		fuel = 0;
 		
 	}
 	
 	void OnTriggerEnter(Collider other) {
+		
 		if (other.name.Equals("rubble")) {
 			Emitter1.particleSystem.Play();
-			
 		}
 		
 	}
 	
 	//breakable stuff to destroy, slowing the vehicle down
 	void OnTriggerStay(Collider other) {
-		
-		if (other.name.Equals("rubble") & ship.rigidbody.velocity.x > 0) {
-	
-			
-			ship.rigidbody.AddForce(pushbackforce,0,0);
-			
-			
-		}	
+		//TODO big blocks apply a lot of continuous force, speeding up the ship too quickly
+		if (other.name.Equals("rubble")) {
+				print("in rubble");
+		}
 	}
 	
 	
 	//TODO every block rewards a coin
 	void OnTriggerExit(Collider other) {
+		//print(other.name);
 		Emitter1.particleSystem.Stop();
 		Instantiate(coin);
 		

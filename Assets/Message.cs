@@ -21,10 +21,10 @@ public class Message : MonoBehaviour {
 		iTween.MoveTo(gameObject,ht);
 	}
 	
-	
+	//This script is generatings bugs, maybe if it's called multiple times too close together.
 	public void setMessage(string msg) {
-		ht.Add("y",0.5);
-		ht.Add("time",1.0);
+		ht["y"] = 0.1;
+		ht["time"] = 1.0;
 		ht.Add("EaseType","easeInOutCubic");
 		ht.Add("oncomplete","OnComplete");	
 		iTween.MoveTo(gameObject,ht);

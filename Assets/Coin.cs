@@ -12,8 +12,8 @@ public class Coin : MonoBehaviour {
 	Hashtable ht = new Hashtable();
 	
 	void Awake(){
-		ht.Add("x",0.15);
-		ht.Add("y",0.95);
+		ht.Add("x",0.1);
+		ht.Add("y",0.9);
 		ht.Add("time",1.0);
 		ht.Add("EaseType","easeInOutCubic");
 		ht.Add("oncomplete","OnComplete");
@@ -21,9 +21,6 @@ public class Coin : MonoBehaviour {
 
 	void Start(){
 		//get a reference to the object
-		
-	
-		
 		iTween.MoveTo(gameObject,ht);
 	}
 	
