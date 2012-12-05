@@ -18,13 +18,15 @@ public class Button : MonoBehaviour {
 	}
 	
 	void OnMouseDown() {
-		this.transform.localScale = new Vector3(0.05f,0.05f,1f);	
+		this.transform.Translate(0,-0.01f,0);
 	}
 	
 	//public Main targetscript;
 	
 	void OnMouseUp() {
-		this.transform.localScale = new Vector3(0.0f,0.0f,1f);	
+		//this.transform.localScale = new Vector3(0.0f,0.0f,1f);	
+		//this.transform.translate(0,-0.2f,0);
+		this.transform.Translate(0,0.01f,0);
 		Application.LoadLevel(targetscene);
 	}
 	

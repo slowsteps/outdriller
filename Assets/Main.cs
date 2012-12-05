@@ -19,6 +19,7 @@ public class Main : MonoBehaviour {
 	public Light drillglow;
 	public GUITexture coin;
 	public GameObject message;
+	public GameObject rubbleExplosion;
 	//game state properties accessible from other scenes
 	static public int days;
 	static public int coins;
@@ -36,8 +37,9 @@ public class Main : MonoBehaviour {
 
 	private float drillspeed; //used for visual rotating effect
 	private float forwardspeed;
+	private float airdrag;
+	private float rubbledrag;
 	private int fuelconsumption;
-	private bool jumpAllowed;
 	private float savedtimestamp;
 	private Vector3 startposition;
 	
@@ -59,10 +61,9 @@ public class Main : MonoBehaviour {
 		//first play only
 		if (!gameisalreadyrunning) {
 			startposition = ship.transform.position;
-			print ("startpos " + startposition);
 			drillBoostOn = false;
 			drillpower = 4;
-			fueltankcapacity = 800;
+			fueltankcapacity = 10000;
 			overheatingtemperature = 50;
 			updateUI();
 			gameisalreadyrunning=true;
@@ -82,7 +83,9 @@ public class Main : MonoBehaviour {
 			temperature = 0;	
 			levelcomplete = false;
 			drillspeed = 4f;
-			forwardspeed = 5f;
+			forwardspeed = 50f;
+			airdrag = 2f;
+			rubbledrag = 10f;
 			fuelconsumption = 1;	
 			fuel = fueltankcapacity;
 			countdownready = false;
@@ -106,15 +109,16 @@ public class Main : MonoBehaviour {
 		//Award timing speed boost
 		if (Input.anyKeyDown & turbostartallowed) {
 			float turbodelta = Mathf.Abs(countdowntimestamp - Time.time);
-			if (countdownready & (turbodelta < 1)) {
+			if (countdownready & (turbodelta < 0.5f)) {
 				ship.rigidbody.AddForce(new Vector3(200/turbodelta,0,0));
-				//message.GetComponent<Message>().setMessage("Turbo start!");
+				message.GetComponent<Message>().setMessage("Turbo start!");
 			}
 			turbostartallowed = false;
 		}
 		//end countdown
 		if (!countdownready) return;	
 		
+		//transforms
 		//fire.transform.parent = this.transform;
 		vehicle.transform.position = this.transform.position;
 		
@@ -127,25 +131,26 @@ public class Main : MonoBehaviour {
 			temperatureLabel.guiText.material.color = Color.white;		
 		}
 		
-		
-		if (drillBoostOn & (temperature <= overheatingtemperature) & (fuel > 0)) {
-			drill.transform.Rotate(0,drillspeed,0);	
+		//todo add maxtemp cutoff, without jitter
+		if (drillBoostOn) {
+			drill.transform.Rotate(0,drillspeed,0);
 			temperature++;
 		}
-		else {
-			if (temperature>0) {
+		else if (temperature>0) {				
 				temperature--;
-			}
 		}
+		
 		
 		drillglow.intensity = temperature/overheatingtemperature;
 	
 		//camera tracks ship
-		mainCamera.transform.position = new Vector3(ship.transform.position.x,mainCamera.transform.position.y,mainCamera.transform.position.z);
+		float newx = ship.transform.position.x - (ship.rigidbody.velocity.x/10);
+		float newy = mainCamera.transform.position.y;
+		float newz = mainCamera.transform.position.z;
+		mainCamera.transform.position = new Vector3(newx,newy,newz);
 		mainCamera.transform.LookAt(ship.transform);
 		
-		//LEVEL COMPLETE SECTION
-		//normal forward motion when fuel is available
+		//LEVEL COMPLETE
 		if (fuel <= 0 ) {
 			//ran out of fuel, level complete
 			fuelLabel.guiText.material.color = Color.red;
@@ -158,7 +163,6 @@ public class Main : MonoBehaviour {
 		}
 		//fuel available, moving forward
 		else {
-			//TODO should be .left??
 			ship.rigidbody.AddForce(forwardspeed*Vector3.right);
 			fuel = fuel - fuelconsumption;
 			updateUI();
@@ -167,28 +171,19 @@ public class Main : MonoBehaviour {
 		
 		
 		
-		
-		//END LEVELCOMPLETE
-		
-		if (Input.GetKeyDown(KeyCode.RightArrow)) {
+		if (Input.GetKeyDown(KeyCode.RightArrow) & fuel > 0) {
+			print ("keydown");
 			drillBoostOn = true;
-		}
-		
-		if (Input.GetKeyUp(KeyCode.RightArrow)) {
-			drillBoostOn = false;
-		}
-	
-		//drill on
-		if (drillBoostOn & (fuel > 0)) {
 			fuelconsumption = 5;
 			Emitter1.particleSystem.emissionRate = 300;
 		}
-		//drill off
-		else {
+		
+		if (Input.GetKeyUp(KeyCode.RightArrow) || fuel <= 0) {
+			drillBoostOn = false;
 			fuelconsumption = 1;
 			Emitter1.particleSystem.emissionRate = 50;
+
 		}
-	
 		
 		
 	}
@@ -214,19 +209,18 @@ public class Main : MonoBehaviour {
 	
 	//breakable stuff to destroy, slowing the vehicle down
 	void OnTriggerStay(Collider other) {
-		//TODO big blocks apply a lot of continuous force, speeding up the ship too quickly
 		if (other.name.Equals("rubble")) {
-				print("in rubble");
+			if (drillBoostOn) this.rigidbody.drag = airdrag;
+			else this.rigidbody.drag = rubbledrag;
+				
 		}
 	}
 	
 	
-	//TODO every block rewards a coin
 	void OnTriggerExit(Collider other) {
-		//print(other.name);
+		this.rigidbody.drag = airdrag;
 		Emitter1.particleSystem.Stop();
 		Instantiate(coin);
-		
 	}
 	
 	
