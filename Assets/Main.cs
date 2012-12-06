@@ -32,6 +32,7 @@ public class Main : MonoBehaviour {
 	static public bool countdownready;
 	static public float countdowntimestamp;
 	private bool turbostartallowed;
+	private GameObject wheel;
 	//
 	private bool drillBoostOn;
 
@@ -52,6 +53,9 @@ public class Main : MonoBehaviour {
 			//TODO constructor runs everytime on openscene
 			mainCamera.transform.LookAt(transform);
 			startRound();	
+		//get references to objects
+		wheel = GameObject.Find("wheel");
+		
 	}
 	
 	//game over, next go
@@ -82,7 +86,7 @@ public class Main : MonoBehaviour {
 			Emitter1.particleSystem.Stop();
 			temperature = 0;	
 			levelcomplete = false;
-			drillspeed = 4f;
+			drillspeed = 0f;
 			forwardspeed = 50f;
 			airdrag = 2f;
 			rubbledrag = 10f;
@@ -118,11 +122,15 @@ public class Main : MonoBehaviour {
 		//end countdown
 		if (!countdownready) return;	
 		
-		//transforms
+		//TRANSFORMS AND PROCEDURAL ANIMATIONS
 		//fire.transform.parent = this.transform;
 		vehicle.transform.position = this.transform.position;
+		//big wheel
+		float wheelturnspeed = 0.4f*this.rigidbody.velocity.x;
+		wheel.transform.Rotate(0,0,-wheelturnspeed,Space.World);
 		
 		
+			
 		//the drill is running, make red when close to overheating
 		if (temperature > overheatingtemperature - 20) {
 			temperatureLabel.guiText.material.color = Color.red;	
@@ -133,22 +141,32 @@ public class Main : MonoBehaviour {
 		
 		//todo add maxtemp cutoff, without jitter
 		if (drillBoostOn) {
-			drill.transform.Rotate(0,drillspeed,0);
+			drillspeed = 10f;
+			
 			temperature++;
 		}
 		else if (temperature>0) {				
 				temperature--;
+				
 		}
-		
+		if (drillspeed>0) drillspeed = drillspeed - 0.2f;
+		drill.transform.Rotate(0,drillspeed,0);
 		
 		drillglow.intensity = temperature/overheatingtemperature;
 	
-		//camera tracks ship
-		float newx = ship.transform.position.x - (ship.rigidbody.velocity.x/10);
-		float newy = mainCamera.transform.position.y;
-		float newz = mainCamera.transform.position.z;
-		mainCamera.transform.position = new Vector3(newx,newy,newz);
-		mainCamera.transform.LookAt(ship.transform);
+		//camera tracks ship, TODO add spring follow
+
+		
+		Vector3 campos = mainCamera.transform.position;
+		Vector3 shippos   = ship.transform.position;
+		Vector3 topos = new Vector3();
+		topos.x = shippos.x;
+		topos.y = campos.y;
+		topos.z = campos.z;
+		
+
+		mainCamera.transform.position = topos;
+	
 		
 		//LEVEL COMPLETE
 		if (fuel <= 0 ) {

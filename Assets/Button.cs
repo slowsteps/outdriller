@@ -6,6 +6,7 @@ using System.Collections;
 public class Button : MonoBehaviour {
 	
 	public string targetscene;
+	private float oldz;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,6 +15,7 @@ public class Button : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 		//print ("ticking");
 	}
 	
