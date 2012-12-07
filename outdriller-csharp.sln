@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{D22ECC49-2096-2E4A-B4CB-67A0BA9F744A}") = "outdriller", "Assembly-CSharp-firstpass-vs.csproj", "{F849CBE8-E280-70F5-B6E8-705155C85A90}"
+EndProject
 Project("{D22ECC49-2096-2E4A-B4CB-67A0BA9F744A}") = "outdriller", "Assembly-CSharp-vs.csproj", "{CEABEFF7-F57C-AB89-9DAE-BE5087F6D5B1}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F849CBE8-E280-70F5-B6E8-705155C85A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F849CBE8-E280-70F5-B6E8-705155C85A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F849CBE8-E280-70F5-B6E8-705155C85A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F849CBE8-E280-70F5-B6E8-705155C85A90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CEABEFF7-F57C-AB89-9DAE-BE5087F6D5B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CEABEFF7-F57C-AB89-9DAE-BE5087F6D5B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEABEFF7-F57C-AB89-9DAE-BE5087F6D5B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -17,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																			GlobalSection(MonoDevelopProperties) = preSolution
+																																									GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																													GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> 2bfbed157c25b1622738959a079f7db75986f0a9

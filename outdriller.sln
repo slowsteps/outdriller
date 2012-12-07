@@ -1,9 +1,13 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{D22ECC49-2096-2E4A-B4CB-67A0BA9F744A}") = "outdriller", "Assembly-CSharp-firstpass.csproj", "{F849CBE8-E280-70F5-B6E8-705155C85A90}"
+EndProject
 Project("{D22ECC49-2096-2E4A-B4CB-67A0BA9F744A}") = "outdriller", "Assembly-CSharp.csproj", "{CEABEFF7-F57C-AB89-9DAE-BE5087F6D5B1}"
 EndProject
 Project("{D22ECC49-2096-2E4A-B4CB-67A0BA9F744A}") = "outdriller", "Assembly-UnityScript-firstpass.unityproj", "{48683C24-299D-49CF-78DD-1CD13EA92A4B}"
+EndProject
+Project("{D22ECC49-2096-2E4A-B4CB-67A0BA9F744A}") = "outdriller", "Assembly-UnityScript-Editor.unityproj", "{658DFFBB-BBAE-3186-9CD6-58C0683F5CA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F849CBE8-E280-70F5-B6E8-705155C85A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F849CBE8-E280-70F5-B6E8-705155C85A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F849CBE8-E280-70F5-B6E8-705155C85A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F849CBE8-E280-70F5-B6E8-705155C85A90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CEABEFF7-F57C-AB89-9DAE-BE5087F6D5B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CEABEFF7-F57C-AB89-9DAE-BE5087F6D5B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEABEFF7-F57C-AB89-9DAE-BE5087F6D5B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -19,11 +27,15 @@ Global
 		{48683C24-299D-49CF-78DD-1CD13EA92A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48683C24-299D-49CF-78DD-1CD13EA92A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48683C24-299D-49CF-78DD-1CD13EA92A4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658DFFBB-BBAE-3186-9CD6-58C0683F5CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658DFFBB-BBAE-3186-9CD6-58C0683F5CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658DFFBB-BBAE-3186-9CD6-58C0683F5CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658DFFBB-BBAE-3186-9CD6-58C0683F5CA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																		GlobalSection(MonoDevelopProperties) = preSolution
+																																								GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																													GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> 2bfbed157c25b1622738959a079f7db75986f0a9

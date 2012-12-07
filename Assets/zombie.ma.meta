@@ -22,6 +22,15 @@ ModelImporter:
     100032: pCylinder1
     100034: pSphere1
     100036: //RootNode
+    100038: zombiebody
+    100040: zombiehead
+    100042: zombieleftarm
+    100044: zombieleftarm1
+    100046: zombielefteye
+    100048: zombieneck
+    100050: zombierightarm
+    100052: zombierightarm1
+    100054: zombierighteye
     400000: group
     400002: group1
     400004: group2
@@ -41,6 +50,15 @@ ModelImporter:
     400032: pCylinder1
     400034: pSphere1
     400036: //RootNode
+    400038: zombiebody
+    400040: zombiehead
+    400042: zombieleftarm
+    400044: zombieleftarm1
+    400046: zombielefteye
+    400048: zombieneck
+    400050: zombierightarm
+    400052: zombierightarm1
+    400054: zombierighteye
     2300000: pasted__pasted__pasted__pCube1
     2300002: pasted__pasted__pCube1
     2300004: pasted__pCube1
@@ -51,6 +69,15 @@ ModelImporter:
     2300014: pCube3
     2300016: pCylinder1
     2300018: pSphere1
+    2300020: zombiebody
+    2300022: zombiehead
+    2300024: zombieleftarm
+    2300026: zombieleftarm1
+    2300028: zombielefteye
+    2300030: zombieneck
+    2300032: zombierightarm
+    2300034: zombierightarm1
+    2300036: zombierighteye
     3300000: pasted__pasted__pasted__pCube1
     3300002: pasted__pasted__pCube1
     3300004: pasted__pCube1
@@ -61,6 +88,15 @@ ModelImporter:
     3300014: pCube3
     3300016: pCylinder1
     3300018: pSphere1
+    3300020: zombiebody
+    3300022: zombiehead
+    3300024: zombieleftarm
+    3300026: zombieleftarm1
+    3300028: zombielefteye
+    3300030: zombieneck
+    3300032: zombierightarm
+    3300034: zombierightarm1
+    3300036: zombierighteye
     4300000: pCube1
     4300002: pasted__pCube1
     4300004: pCube2
@@ -71,6 +107,16 @@ ModelImporter:
     4300014: pSphere1
     4300016: pCylinder1
     4300018: pasted__pCylinder1
+    4300020: zombiebody
+    4300022: zombieleftarm
+    4300024: zombierightarm
+    4300026: zombierightarm1
+    4300028: zombieleftarm1
+    4300030: zombieneck
+    4300032: zombiehead
+    4300034: zombielefteye
+    4300036: zombierighteye
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
