@@ -87,9 +87,9 @@ public class Main : MonoBehaviour {
 			temperature = 0;	
 			levelcomplete = false;
 			drillspeed = 0f;
-			forwardspeed = 50f;
-			airdrag = 2f;
-			rubbledrag = 10f;
+			forwardspeed = 150f;
+			airdrag = 8f;
+			rubbledrag = 30f;
 			fuelconsumption = 1;	
 			fuel = fueltankcapacity;
 			countdownready = false;
@@ -156,16 +156,17 @@ public class Main : MonoBehaviour {
 	
 		//camera tracks ship, TODO add spring follow
 
+		mainCamera.transform.parent = ship.transform;
 		
-		Vector3 campos = mainCamera.transform.position;
-		Vector3 shippos   = ship.transform.position;
-		Vector3 topos = new Vector3();
-		topos.x = shippos.x;
-		topos.y = campos.y;
-		topos.z = campos.z;
-		
-
-		mainCamera.transform.position = topos;
+//		Vector3 campos = mainCamera.transform.position;
+//		Vector3 shippos   = ship.transform.position;
+//		Vector3 topos = new Vector3();
+//		topos.x = shippos.x;
+//		topos.y = campos.y;
+//		topos.z = campos.z;
+//		
+//
+//		mainCamera.transform.position = topos;
 	
 		
 		//LEVEL COMPLETE
