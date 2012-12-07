@@ -1,0 +1,103 @@
+fileFormatVersion: 2
+guid: 9934ce2f050d74b40a68b7cd175589ff
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: gBody
+    100002: gMotor1
+    100004: gMotor2
+    100006: gTool
+    100008: //RootNode
+    400000: gBody
+    400002: gMotor1
+    400004: gMotor2
+    400006: gTool
+    400008: //RootNode
+    2300000: gBody
+    2300002: gMotor1
+    2300004: gMotor2
+    2300006: gTool
+    3300000: gBody
+    3300002: gMotor1
+    3300004: gMotor2
+    3300006: gTool
+    4300000: gMotor1
+    4300002: gTool
+    4300004: gBody
+    4300006: gMotor2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton:
+    - name: unity_test
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: gBody
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: .99999994, y: 0, z: 0, w: 7.38870313e-15}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: gMotor1
+      position: {x: .25, y: -.099999994, z: -.099999994}
+      rotation: {x: 0, y: -0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: gMotor2
+      position: {x: -.25, y: -.099999994, z: -.099999994}
+      rotation: {x: 0, y: -0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: gTool
+      position: {x: 0, y: -.199999988, z: .0726501793}
+      rotation: {x: 0, y: -0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

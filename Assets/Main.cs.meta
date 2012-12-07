@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a2f3bed5fc7934af08bbd84ae4dc4d50
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - ship: {instanceID: 0}
+  - gMotor1: {instanceID: 0}
+  - gMotor2: {instanceID: 0}
+  - Emitter1: {instanceID: 0}
+  - mainCamera: {instanceID: 0}
+  - coinsLabel: {instanceID: 0}
+  - daysLabel: {instanceID: 0}
+  - fuelLabel: {instanceID: 0}
+  - drillpowerLabel: {instanceID: 0}
+  - temperatureLabel: {instanceID: 0}
+  - continuebutton: {instanceID: 0}
+  - fire: {instanceID: 0}
+  - drillglow: {instanceID: 0}
+  - coin: {fileID: 13100000, guid: 1db2984fc73504bf69c6388a020ac939, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
