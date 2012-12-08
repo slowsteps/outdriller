@@ -20,6 +20,8 @@ public class Main : MonoBehaviour {
 	public GUITexture coin;
 	public GameObject message;
 	public GameObject rubbleExplosion;
+	public GameObject cameratarget;
+	public GameObject gun;
 	//game state properties accessible from other scenes
 	static public int days;
 	static public int coins;
@@ -155,8 +157,9 @@ public class Main : MonoBehaviour {
 		drillglow.intensity = temperature/overheatingtemperature;
 	
 		//camera tracks ship, TODO add spring follow
-
-		mainCamera.transform.parent = ship.transform;
+		Vector3 camvelocity = Vector3.zero;
+		mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position,cameratarget.transform.position,ref camvelocity,0.1f);
+		mainCamera.transform.LookAt(ship.transform);
 		
 //		Vector3 campos = mainCamera.transform.position;
 //		Vector3 shippos   = ship.transform.position;
@@ -202,6 +205,11 @@ public class Main : MonoBehaviour {
 			fuelconsumption = 1;
 			Emitter1.particleSystem.emissionRate = 50;
 
+		}
+		
+		if (Input.GetKeyUp(KeyCode.Space) || fuel <= 0) {
+			gun.GetComponent<Gun>().Fire();
+			
 		}
 		
 		

@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\AnimateDrill.cs" />
      <Compile Include="Assets\BacktoGame.cs" />
+     <Compile Include="Assets\Bullet.cs" />
      <Compile Include="Assets\Button.cs" />
      <Compile Include="Assets\Buycoins.cs" />
      <Compile Include="Assets\Coin.cs" />
@@ -53,6 +54,7 @@
      <Compile Include="Assets\Countdown.cs" />
      <Compile Include="Assets\Destructable.cs" />
      <Compile Include="Assets\Finish.cs" />
+     <Compile Include="Assets\Gun.cs" />
      <Compile Include="Assets\Main.cs" />
      <Compile Include="Assets\Message.cs" />
      <Compile Include="Assets\Plusbutton.cs" />

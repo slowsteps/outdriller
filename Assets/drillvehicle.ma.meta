@@ -34,6 +34,12 @@ ModelImporter:
     100056: pTorus1
     100058: wheel_velg
     100060: wheelring
+    100062: pCylinder4
+    100064: pCylinder5
+    100066: barrel
+    100068: gunbase
+    100070: turret
+    100072: tank
     400000: axel
     400002: drill
     400004: //RootNode
@@ -65,6 +71,12 @@ ModelImporter:
     400056: pTorus1
     400058: wheel_velg
     400060: wheelring
+    400062: pCylinder4
+    400064: pCylinder5
+    400066: barrel
+    400068: gunbase
+    400070: turret
+    400072: tank
     2300000: axel
     2300002: drill
     2300004: frame
@@ -88,6 +100,12 @@ ModelImporter:
     2300040: pTorus1
     2300042: wheel_velg
     2300044: wheelring
+    2300046: pCylinder4
+    2300048: pCylinder5
+    2300050: barrel
+    2300052: gunbase
+    2300054: turret
+    2300056: tank
     3300000: axel
     3300002: drill
     3300004: frame
@@ -111,6 +129,12 @@ ModelImporter:
     3300040: pTorus1
     3300042: wheel_velg
     3300044: wheelring
+    3300046: pCylinder4
+    3300048: pCylinder5
+    3300050: barrel
+    3300052: gunbase
+    3300054: turret
+    3300056: tank
     4300000: drill
     4300002: axel
     4300004: wheel
@@ -134,6 +158,12 @@ ModelImporter:
     4300040: pTorus1
     4300042: wheelring
     4300044: wheel_velg
+    4300046: pCylinder5
+    4300048: pCylinder4
+    4300050: gunbase
+    4300052: turret
+    4300054: barrel
+    4300056: tank
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
