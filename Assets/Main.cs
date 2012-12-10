@@ -40,7 +40,7 @@ public class Main : MonoBehaviour {
 
 	private float drillspeed; //used for visual rotating effect
 	private float forwardspeed;
-	private float airdrag;
+	public float airdrag;
 	private float rubbledrag;
 	private int fuelconsumption;
 	private float savedtimestamp;
@@ -161,16 +161,6 @@ public class Main : MonoBehaviour {
 		mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position,cameratarget.transform.position,ref camvelocity,0.1f);
 		mainCamera.transform.LookAt(ship.transform);
 		
-//		Vector3 campos = mainCamera.transform.position;
-//		Vector3 shippos   = ship.transform.position;
-//		Vector3 topos = new Vector3();
-//		topos.x = shippos.x;
-//		topos.y = campos.y;
-//		topos.z = campos.z;
-//		
-//
-//		mainCamera.transform.position = topos;
-	
 		
 		//LEVEL COMPLETE
 		if (fuel <= 0 ) {
@@ -194,7 +184,6 @@ public class Main : MonoBehaviour {
 		
 		
 		if (Input.GetKeyDown(KeyCode.RightArrow) & fuel > 0) {
-			print ("keydown");
 			drillBoostOn = true;
 			fuelconsumption = 5;
 			Emitter1.particleSystem.emissionRate = 300;
@@ -207,7 +196,7 @@ public class Main : MonoBehaviour {
 
 		}
 		
-		if (Input.GetKeyUp(KeyCode.Space) || fuel <= 0) {
+		if (Input.GetKeyDown(KeyCode.Space) & fuel > 0) {
 			gun.GetComponent<Gun>().Fire();
 			
 		}
@@ -245,9 +234,8 @@ public class Main : MonoBehaviour {
 	
 	
 	void OnTriggerExit(Collider other) {
-		this.rigidbody.drag = airdrag;
-		Emitter1.particleSystem.Stop();
-		Instantiate(coin);
+		//this.rigidbody.drag = airdrag;
+		//Instantiate(coin);
 	}
 	
 	

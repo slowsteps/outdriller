@@ -7,17 +7,12 @@ public class Gun : MonoBehaviour {
 	
 	public GameObject bullet;
 	public GameObject barrel;
-	private GameObject[] bulletPool; 
+	public GameObject axelshaft;
 	
 	// Use this for initialization
 	void Start () {
-		
-		barrel = GameObject.Find("barrel");
-		
-	 	for (int i = 0; i < 100; i++) {
-	 		//GameObject mybullet = (GameObject)Instantiate(bullet);
-			
-		}
+		axelshaft =  GameObject.Find ("gunaxelshaft");
+		axelshaft.transform.Rotate(0,10,0);
 	}
 	
 
@@ -30,7 +25,7 @@ public class Gun : MonoBehaviour {
 	//TODO get bullet from pre-instantiated pool
 		
 	public void Fire() {
-		GameObject mybullet = (GameObject)Instantiate(bullet,barrel.transform.position,Quaternion.identity);
+		Instantiate(bullet,this.transform.position,this.transform.rotation);
 	}
 		
 		

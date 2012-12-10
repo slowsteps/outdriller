@@ -5,9 +5,14 @@ public class Destructable : MonoBehaviour {
 	
 	private Vector3 oldpos;
 	private bool beingdrilled;
+	private Main mainscript;
+	private GameObject main;
+	private GameObject coin;
 	
 	// Use this for initialization
 	void Start () {
+		main = GameObject.Find("ship");
+		mainscript = main.GetComponent<Main>();
 		oldpos = transform.position;
 		beingdrilled = false;
 		this.rigidbody.isKinematic = true;
@@ -23,27 +28,34 @@ public class Destructable : MonoBehaviour {
 		}
 	}
 	
+	//TODO fix spaghetti calls between this class and main (encapsulate)
 	void OnDestruct() {
 		beingdrilled = false;
+		mainscript.Emitter1.particleSystem.Stop();
+		mainscript.rigidbody.drag = mainscript.airdrag;
+		Instantiate(mainscript.coin);
+		Destroy(this.GetComponent<Transform>().gameObject);
 	}
 
 	void OnTriggerEnter(Collider other) {
-		//print (other.name);
+		
 		if (other.name == "ship") {	
 			beingdrilled = true;
+		}
+		//Bullet destroys obstacle on first contact
+		if (other.name == "bulletprefab(Clone)") {
+			OnDestruct();	
 		}
 	}
 	
 	void OnTriggerExit(Collider other) {
-		//TODO ADD particle explosion
+		//Ship needs to go though the entire obstacle to destroy it
 		if (other.name == "ship") {
-			
-			Destroy(this.GetComponent<Transform>().gameObject);
-			
+			OnDestruct();	
 		}
-		
-	
 	}
+	
+	
 
 
 }
