@@ -28,13 +28,7 @@ public class Plusbutton : MonoBehaviour {
 					Main.coins--;
 					shopmanager.updateUI();
 				}
-				//drill
-				else if(gamevariable =="drillpower") {
-					Main.drillpower += 1;
-					Main.coins--;
-					shopmanager.updateUI();
-				}
-		
+				
 			}
 			else {
 				print("not enough coins");

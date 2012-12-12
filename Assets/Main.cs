@@ -12,7 +12,6 @@ public class Main : MonoBehaviour {
 	public GameObject coinsLabel;
 	public GameObject daysLabel;	
 	public GameObject fuelLabel;
-	public GameObject drillpowerLabel;
 	public GameObject temperatureLabel;
 	public GUITexture continuebutton;
 	public GameObject fire;
@@ -27,7 +26,6 @@ public class Main : MonoBehaviour {
 	static public int days;
 	static public int coins;
 	static public int fueltankcapacity;
-	static public int drillpower;
 	static public int fuel;
 	static public int temperature;
 	static public int overheatingtemperature;
@@ -71,8 +69,7 @@ public class Main : MonoBehaviour {
 		if (!gameisalreadyrunning) {
 			startposition = ship.transform.position;
 			drillBoostOn = false;
-			drillpower = 4;
-			fueltankcapacity = 4000;
+			fueltankcapacity = 8000;
 			overheatingtemperature = 50;
 			updateUI();
 			gameisalreadyrunning=true;
@@ -100,10 +97,8 @@ public class Main : MonoBehaviour {
 	}
 	
 	void updateUI() {
-		fuelLabel.guiText.text = fuel + " fuel";
 		daysLabel.guiText.text = days + " days";
 		coinsLabel.guiText.text = coins + " coins";	
-		drillpowerLabel.guiText.text = "drillpower " + drillpower;
 		temperatureLabel.guiText.text = temperature + " Degrees";
 		//TODO make seperate drill class, like gun?
 		float barwidth = maxDrillBarWidth *  fuel/fueltankcapacity;
@@ -172,7 +167,6 @@ public class Main : MonoBehaviour {
 		//LEVEL COMPLETE
 		if (fuel <= 0 ) {
 			//ran out of fuel, level complete
-			fuelLabel.guiText.material.color = Color.red;
 			Emitter1.particleSystem.Stop();
 			fire.particleSystem.Stop();
 			levelcomplete = true;

@@ -5,7 +5,6 @@ public class Shopmanager : MonoBehaviour {
 	
 	public GUIText coinslabel;
 	public GUIText fueltanklabel;
-	public GUIText drillpowerlabel;
 	
 	
 	// Use this for initialization
@@ -24,7 +23,6 @@ public class Shopmanager : MonoBehaviour {
 	
 	public void updateUI() {
 		fueltanklabel.text = "Fueltank capacity: " + Main.fueltankcapacity;
-		drillpowerlabel.text = "Drillpower: " + Main.drillpower;
 		coinslabel.text = "Coins: " + Main.coins;
 	}
 	
