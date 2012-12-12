@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: drillvehicle.ma
-//Last modified: Wed, Dec 12, 2012 12:06:59 AM
+//Last modified: Wed, Dec 12, 2012 01:40:08 AM
 //Codeset: UTF-8
 requires maya "2013";
 requires "stereoCamera" "10.0";

@@ -4,11 +4,25 @@ ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
     100000: //RootNode
+    100002: bullet
+    100004: bullet1
+    100006: bulletcube
     400000: //RootNode
+    400002: bullet
+    400004: bullet1
+    400006: bulletcube
     2300000: //RootNode
+    2300002: bullet
+    2300004: bullet1
+    2300006: bulletcube
     3300000: //RootNode
+    3300002: bullet
+    3300004: bullet1
+    3300006: bulletcube
     4300000: bullet
     4300002: pSphere1
+    4300004: bullet1
+    4300006: bulletcube
     9500000: //RootNode
   materials:
     importMaterials: 1

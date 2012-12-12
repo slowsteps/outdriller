@@ -3,17 +3,15 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 	
-	public float wakeupTime;
-	public bool shot;
+	public float wakeupTime; //at the end of their lifetime, bullets are recycled
+	public bool shot;  // marks bullet as begin used, is used in gun/bulletpool
 	
 	private float speed;
 	
 	// Use this for initialization
 	void Start () {
 		onRecycle();
-//		transform.Rotate(90f,0,0);
-//		transform.localScale = new Vector3(3,1,1);
-//		shot = false;
+
 	}
 	
 	public void onFire(GameObject gun) {
@@ -23,7 +21,7 @@ public class Bullet : MonoBehaviour {
 		
 		transform.rotation = gun.transform.rotation;
 //		TODO bake this into model
-		transform.Rotate(90f,0,0);
+		//transform.Rotate(90f,0,0);
 		
 		speed = 0.8f;
 		shot = true;
@@ -40,6 +38,10 @@ public class Bullet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if ((Time.time - wakeupTime) > 2 ) {
+			onRecycle();
+		}
+		else if(transform.position.y < 0.2f) {
+			//rigidbody.isKinematic = false;
 			onRecycle();
 		}
 		else { 

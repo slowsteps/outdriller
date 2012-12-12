@@ -22,6 +22,7 @@ public class Main : MonoBehaviour {
 	public GameObject rubbleExplosion;
 	public GameObject cameratarget;
 	public GameObject gun;
+	public GUITexture drillProgressbar;
 	//game state properties accessible from other scenes
 	static public int days;
 	static public int coins;
@@ -45,6 +46,8 @@ public class Main : MonoBehaviour {
 	private int fuelconsumption;
 	private float savedtimestamp;
 	private Vector3 startposition;
+	private float maxDrillBarWidth;
+
 	
 	static private bool gameisalreadyrunning;
 	
@@ -52,11 +55,11 @@ public class Main : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		maxDrillBarWidth = drillProgressbar.GetScreenRect().width;
 			//TODO constructor runs everytime on openscene
 			mainCamera.transform.LookAt(transform);
 			startRound();	
-		//get references to objects
-		wheel = GameObject.Find("wheel");
+			wheel = GameObject.Find("wheel");
 		
 	}
 	
@@ -69,16 +72,13 @@ public class Main : MonoBehaviour {
 			startposition = ship.transform.position;
 			drillBoostOn = false;
 			drillpower = 4;
-			fueltankcapacity = 10000;
+			fueltankcapacity = 4000;
 			overheatingtemperature = 50;
 			updateUI();
 			gameisalreadyrunning=true;
-			//message.GetComponent<Message>().setMessage("Get out!, start drilling!");
 		}
 		//consecutive plays
 		else {
-			
-			//ship.rigidbody.velocity = Vector3.zero;
 			fuel = fueltankcapacity;
 			days++;
 			updateUI();
@@ -105,11 +105,18 @@ public class Main : MonoBehaviour {
 		coinsLabel.guiText.text = coins + " coins";	
 		drillpowerLabel.guiText.text = "drillpower " + drillpower;
 		temperatureLabel.guiText.text = temperature + " Degrees";
+		//TODO make seperate drill class, like gun?
+		float barwidth = maxDrillBarWidth *  fuel/fueltankcapacity;
+		drillProgressbar.pixelInset = new Rect(0,0,barwidth,15);
+		
+		
 	}
 
 	//GAME FRAME LOOP
 	void Update () {
 
+		updateUI();
+		
 		//Wait for countdown to finish
 		
 		//Award timing speed boost
@@ -177,7 +184,7 @@ public class Main : MonoBehaviour {
 		else {
 			ship.rigidbody.AddForce(forwardspeed*Vector3.right);
 			fuel = fuel - fuelconsumption;
-			updateUI();
+			
 			
 		}
 		
@@ -200,6 +207,7 @@ public class Main : MonoBehaviour {
 			gun.GetComponent<Gun>().Fire();
 			
 		}
+		
 		
 		
 	}
@@ -232,11 +240,7 @@ public class Main : MonoBehaviour {
 		}
 	}
 	
-	
-	void OnTriggerExit(Collider other) {
-		//this.rigidbody.drag = airdrag;
-		//Instantiate(coin);
-	}
+
 	
 	
 	
