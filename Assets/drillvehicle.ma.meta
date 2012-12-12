@@ -69,6 +69,7 @@ ModelImporter:
     100126: gunaxel
     100128: gunaxelshaft
     100130: barrel2
+    100132: antenna
     400000: axel
     400002: drill
     400004: //RootNode
@@ -135,6 +136,7 @@ ModelImporter:
     400126: gunaxel
     400128: gunaxelshaft
     400130: barrel2
+    400132: antenna
     2300000: axel
     2300002: drill
     2300004: frame
@@ -184,6 +186,7 @@ ModelImporter:
     2300092: gunaxel
     2300094: gunaxelshaft
     2300096: barrel2
+    2300098: antenna
     3300000: axel
     3300002: drill
     3300004: frame
@@ -233,6 +236,7 @@ ModelImporter:
     3300092: gunaxel
     3300094: gunaxelshaft
     3300096: barrel2
+    3300098: antenna
     4300000: drill
     4300002: axel
     4300004: wheel
@@ -282,6 +286,7 @@ ModelImporter:
     4300092: gunaxel
     4300094: gunaxelshaft
     4300096: barrel2
+    4300098: antenna
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode

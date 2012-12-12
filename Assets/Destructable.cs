@@ -33,7 +33,14 @@ public class Destructable : MonoBehaviour {
 		beingdrilled = false;
 		mainscript.Emitter1.particleSystem.Stop();
 		mainscript.rigidbody.drag = mainscript.airdrag;
-		Instantiate(mainscript.coin);
+		//grant a coin
+		//TODO make coin pool
+		
+		Vector3 coinSpawnPos = Camera.current.WorldToViewportPoint(transform.position);
+		Instantiate(Resources.Load("coinprefab"),coinSpawnPos,Quaternion.identity);
+		
+		
+		
 		Destroy(this.GetComponent<Transform>().gameObject);
 	}
 

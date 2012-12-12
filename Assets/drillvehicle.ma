@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: drillvehicle.ma
-//Last modified: Mon, Dec 10, 2012 11:30:08 PM
+//Last modified: Wed, Dec 12, 2012 12:06:59 AM
 //Codeset: UTF-8
 requires maya "2013";
 requires "stereoCamera" "10.0";
@@ -11,14 +11,14 @@ fileInfo "version" "2013 x64";
 fileInfo "cutIdentifier" "201207040330-835994";
 fileInfo "osv" "Mac OS X 10.8.2";
 createNode transform -s -n "persp";
-	setAttr ".t" -type "double3" -27.054542356892863 15.088226377428891 -30.889551063856779 ;
+	setAttr ".t" -type "double3" -31.507647687275572 17.023669500742724 -35.50087662397052 ;
 	setAttr ".r" -type "double3" 163.19999999999797 -43.999999999999602 179.9999999999996 ;
 	setAttr ".rp" -type "double3" -5.3290705182007514e-15 0 0 ;
 	setAttr ".rpt" -type "double3" -3.2836711635857938e-16 2.1379934529572984e-15 9.3590266650232982e-15 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v";
 	setAttr ".fl" 131.52085906799903;
-	setAttr ".coi" 44.706238883829613;
+	setAttr ".coi" 51.402537158878559;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -286,11 +286,11 @@ createNode mesh -n "pCylinderShape5" -p "pCylinder5";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-createNode transform -n "pCylinder9" -p "pCylinder5";
+createNode transform -n "antenna" -p "pCylinder5";
 	setAttr ".t" -type "double3" 0.00248340686173254 0.79236539892297753 0.016255271954146472 ;
 	setAttr ".r" -type "double3" 7.2190361927446182e-05 9.5391370510609581e-06 1.2041393591659439e-11 ;
 	setAttr ".s" -type "double3" 1 0.99999999999999978 0.99999999999999989 ;
-createNode mesh -n "pCylinderShape7" -p "pCylinder9";
+createNode mesh -n "antennaShape" -p "antenna";
 	setAttr -k off ".v";
 	setAttr ".vir" yes;
 	setAttr ".vif" yes;
@@ -1121,11 +1121,11 @@ createNode shadingEngine -n "lambert12SG";
 	setAttr ".ro" yes;
 createNode materialInfo -n "materialInfo25";
 createNode polyCylinder -n "polyCylinder13";
-	setAttr ".r" 0.08;
-	setAttr ".h" 0.1498898818520954;
+	setAttr ".r" 0.12;
+	setAttr ".h" 0.2;
 	setAttr ".sa" 8;
 	setAttr ".sc" 1;
-	setAttr ".cuv" 3;
+	setAttr ".cuv" 1;
 createNode lambert -n "antennalight";
 	setAttr ".c" -type "float3" 1 1 1 ;
 createNode shadingEngine -n "lambert13SG";
@@ -1228,7 +1228,7 @@ connectAttr "polyTweakUV5.out" "turretShape.i";
 connectAttr "polyTweakUV5.uvtk[0]" "turretShape.uvst[0].uvtw";
 connectAttr "polyCylinder10.out" "pCylinderShape4.i";
 connectAttr "polyCylinder11.out" "pCylinderShape5.i";
-connectAttr "polyCylinder13.out" "pCylinderShape7.i";
+connectAttr "polyCylinder13.out" "antennaShape.i";
 connectAttr "polyPipe4.out" "barrel2Shape.i";
 connectAttr "polyCube2.out" "gunbaseShape.i";
 connectAttr "polyCylinder12.out" "|pCylinder6|pCylinderShape6.i";
@@ -1442,7 +1442,7 @@ connectAttr "|group9|pCylinder8|pasted__pPipe3|pasted__pPipeShape3.iog" "lambert
 connectAttr "lambert12SG.msg" "materialInfo25.sg";
 connectAttr "lambert12.msg" "materialInfo25.m";
 connectAttr "antennalight.oc" "lambert13SG.ss";
-connectAttr "pCylinderShape7.iog" "lambert13SG.dsm" -na;
+connectAttr "antennaShape.iog" "lambert13SG.dsm" -na;
 connectAttr "lambert13SG.msg" "materialInfo26.sg";
 connectAttr "antennalight.msg" "materialInfo26.m";
 connectAttr "hyperView1.msg" "nodeEditorPanel2Info.b[0]";
